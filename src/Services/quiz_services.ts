@@ -21,6 +21,7 @@ export const getQuiz = async (
       option: shuffleArray(
         questionObj.incorrect_answers.concat(questionObj.correct_answer)
       ),
+      category: questionObj.category,
     };
   });
 

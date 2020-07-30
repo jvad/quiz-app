@@ -77,3 +77,7 @@ select {
     width: 85%;
   }
 }
+.scoreQ {
+  display: flex;
+  justify-content: space-between;
+}

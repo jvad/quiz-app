@@ -52,6 +52,10 @@ function App() {
       </div>
     );
 
+  const handleCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setCategory(parseInt(e.target.value));
+  };
+
   if (!quiz.length)
     return (
       <div className="wrapper">
@@ -62,8 +66,9 @@ function App() {
               <select
                 required
                 name="Category"
-                onChange={(e) => setCategory(parseInt(e.target.value))}
+                onChange={(e) => handleCategory(e)}
               >
+                <option value="0">Any</option>
                 {categories.map((cat) => (
                   <option value={cat.id} key={cat.id}>
                     {cat.name}
@@ -123,9 +128,9 @@ function App() {
     if (userAns === quiz[currentQuestion].correct_answer) {
       setScore(score + 1);
     }
-    if (currentQuestion !== quiz.length - 1)
+    if (currentQuestion !== quiz.length - 1) {
       setcurrentQuestion(++currentQuestion);
-    else {
+    } else {
       setGameOver(true);
       setcurrentQuestion(0);
     }
@@ -136,17 +141,25 @@ function App() {
     setStart(false);
     setGameOver(false);
     setquiz([]);
+    setCategory(0);
     setTyp("multiple");
     setLoading(false);
   };
+
   return (
     <>
       <div className="wrapper">
         {start && !gameOver ? (
           <div>
-            <h4>
-              Question: {currentQuestion + 1}/{totalQ}
-            </h4>
+            <h4>Category: {quiz[currentQuestion].category}</h4>
+            <div className="scoreQ">
+              <h4>
+                Question: {currentQuestion + 1}/{totalQ}
+              </h4>
+              <h4>
+                Score: {score}/{totalQ}
+              </h4>
+            </div>
           </div>
         ) : null}
 

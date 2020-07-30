@@ -15,6 +15,7 @@ export type QuestionType = {
   correct_answer: string;
   option: string[];
   question: string;
+  category: string;
 };
 export type propTypes = {
   question: string;
